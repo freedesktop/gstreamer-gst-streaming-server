@@ -722,6 +722,15 @@ gss_program_get_resource (GssTransaction * t)
   gss_html_footer (t);
 }
 
+/**
+ * gss_program_add_stream_table:
+ * @program: The program to fetch the streams from.
+ * @s: The string to append the streams to.
+ *
+ * This function populates the list of streams in the rendered page
+ * by iterating through the streams in the passed in program.
+ *
+ */
 void
 gss_program_add_stream_table (GssProgram * program, GString * s)
 {

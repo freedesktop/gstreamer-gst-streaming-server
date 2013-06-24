@@ -58,6 +58,10 @@ gss_utils_get_time_string (void)
   return s;
 }
 
+/**
+ * gss_utils_get_ip_address_string:
+ * The string returned by this function must be freed by the caller.
+ */
 char *
 gss_utils_get_ip_address_string (const char *interface)
 {
@@ -292,6 +296,12 @@ gss_object_param_is_secure (GObject * object, const char *property_name)
   return FALSE;
 }
 
+/**
+ * gss_uuid_create:
+ * @pointer: to allocated array of at least 16 guint8's. The contents will be overwritten.
+ *
+ * Creates a UUID in numeric form.
+ */
 void
 gss_uuid_create (guint8 * uuid)
 {

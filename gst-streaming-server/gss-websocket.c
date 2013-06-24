@@ -174,8 +174,14 @@ gss_websocket_network_event (G_GNUC_UNUSED SoupMessage * msg,
   GST_DEBUG ("client %u network event %d", client->conn_id, event);
 }
 #endif
-
-/* Callbacks used for websocket clients */
+/**
+ * try_parse_websocket_fragment:
+ * @client: The websocket client to perform the callback on.
+ *
+ * Callbacks used for websocket clients
+ *
+ * Return value: TRUE on success, FALSE on failure.
+ */
 static gboolean
 try_parse_websocket_fragment (GssWebsocket * client)
 {
@@ -373,7 +379,15 @@ calc_websocket_challenge_reply (const gchar * key)
 
   return ret;
 }
-
+/**
+ * http_list_contains_value:
+ * @val: A comma seperated list to search through.
+ * @needle: The value to search for in val.
+ *
+ * Linear search through comma seperated list gchar * val for gchar * needle.
+ *
+ * Return value: TRUE if the list contains needle. FALSE otherwise.
+ */
 static gboolean
 http_list_contains_value (const gchar * val, const gchar * needle)
 {
@@ -393,6 +407,14 @@ http_list_contains_value (const gchar * val, const gchar * needle)
   return found_needle;
 }
 
+/**
+ * is_websocket_client:
+ * @client: The client to check.
+ *
+ * Determines if the given client is specifically a websocket client.
+ *
+ * Return value: TRUE if client is a websocket client, otherwise FALSE.
+ */
 static gboolean
 is_websocket_client (GssWebsocket * client)
 {
@@ -449,6 +471,18 @@ is_websocket_client (GssWebsocket * client)
   return TRUE;
 }
 
+/**
+ * gss_websocket_new:
+ * @soup: The soup server to create this GssWebsocket* under
+ * @msg: The message to create this GssWebsocket* for
+ * @context: The context therein.
+ *
+ * Creates and returns a new GssWebsocket*
+ * which is initialized using the passed in SoupServer*,
+ * SoupMessage*, and SoupClientContext*
+ *
+ * Return value: a GssWebsocket* pointing to a newly allocated GssWebsocket.
+ */
 GssWebsocket *
 gss_websocket_new (SoupServer * soup, SoupMessage * msg,
     SoupClientContext * context)
@@ -509,6 +543,18 @@ gss_websocket_new (SoupServer * soup, SoupMessage * msg,
   return client;
 }
 
+/**
+ * gss_websocket_new_single:
+ * @soup: The soup server to create this GssWebsocket* under
+ * @msg: The message to create this GssWebsocket* for
+ * @context: The context therein.
+ *
+ * Creates and returns a new GssWebsocket*
+ * which is initialized using the passed in SoupServer*,
+ * SoupMessage*, and SoupClientContext*
+ *
+ * Return value: a GssWebsocket* pointing to a newly allocated GssWebsocket.
+ */
 GssWebsocket *
 gss_websocket_new_single (SoupServer * soup, SoupMessage * msg,
     G_GNUC_UNUSED SoupClientContext * context)

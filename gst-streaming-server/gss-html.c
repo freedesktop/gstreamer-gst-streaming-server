@@ -503,6 +503,14 @@ gss_html_sanitize_url (const char *s)
   return out;
 }
 
+/**
+ * gss_html_entity_is_sane:
+ * @s: The string to check for alphanumeric characters
+ *
+ * Checks if any characters in s are not alphanumeric
+ *
+ * Return value: TRUE if all characters in S are alphanumeric, false otherwise.
+ */
 gboolean
 gss_html_entity_is_sane (const char *s)
 {
@@ -521,6 +529,14 @@ gss_html_entity_is_sane (const char *s)
   return TRUE;
 }
 
+/**
+ * gss_html_attribute_is_sane:
+ * @s: The string to check for alphanumeric characters
+ *
+ * Checks if any characters in s are not alphanumeric
+ *
+ * Return value: TRUE if all characters in S are alphanumeric, false otherwise.
+ */
 gboolean
 gss_html_attribute_is_sane (const char *s)
 {
@@ -540,6 +556,14 @@ gss_html_attribute_is_sane (const char *s)
 
 }
 
+/**
+ * gss_html_url_is_sane:
+ * @s: The string to check for alphanumeric characters
+ *
+ * Checks if any characters in s are not alphanumeric
+ *
+ * Return value: TRUE if all characters in S are alphanumeric, false otherwise.
+ */
 gboolean
 gss_html_url_is_sane (const char *s)
 {

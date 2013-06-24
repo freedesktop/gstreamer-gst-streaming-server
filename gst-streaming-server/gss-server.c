@@ -123,6 +123,15 @@ static const gchar *soup_method_source;
 
 static GObjectClass *parent_class;
 
+/**
+ * get_http_server:
+ * @port: The port the new server should use
+ *
+ * Create's a new libsoup server at the given port.
+ * If supported, the new server will be IPv6. If not, IPv4.
+ *
+ * Return value: The newly created server.
+ */
 static SoupServer *
 get_http_server (int port)
 {
@@ -141,6 +150,13 @@ get_http_server (int port)
   return server;
 }
 
+/**
+ * gss_server_set_http_port:
+ * @port: The port the server should use
+ * @server: The server to set the port of.
+ *
+ * Sets the http port to use for the given server.
+ */
 static void
 gss_server_set_http_port (GssServer * server, int port)
 {
@@ -895,6 +911,13 @@ gss_server_add_string_resource (GssServer * server, const char *filename,
   gss_server_add_resource_simple (server, r);
 }
 
+/**
+ * gss_server_set_server_hostname:
+ * @server: The server to set the hostname of.
+ * @hostname: The hostname to set the server to use.
+ *
+ * Set's the server's hostname and updates the url's accordingly.
+ */
 void
 gss_server_set_server_hostname (GssServer * server, const char *hostname)
 {
@@ -924,6 +947,10 @@ gss_server_set_server_hostname (GssServer * server, const char *hostname)
   }
 }
 
+/**
+ * gss_server_follow_all:
+ * This function does nothing.
+ */
 void
 gss_server_follow_all (GssProgram * program, const char *host)
 {
@@ -944,6 +971,15 @@ gss_server_add_program_simple (GssServer * server, GssProgram * program)
   }
 }
 
+/**
+ * gss_server_add_program:
+ * @server: The server to add the new program to.
+ * @program_name: The name of the new program to add.
+ *
+ * Adds a new program with the given name to the given server.
+ *
+ * Return value: The newly added GssProgram.
+ */
 GssProgram *
 gss_server_add_program (GssServer * server, const char *program_name)
 {
@@ -964,6 +1000,14 @@ gss_server_remove_program (GssServer * server, GssProgram * program)
   GSS_OBJECT_SERVER (program) = NULL;
 }
 
+/**
+ * gss_server_add_admin_resource:
+ * @server: The server to which to add the administration resource.
+ * @resource: The resource to add to the administration panel.
+ * @name: The name to use for the hyperlink to this resource.
+ *
+ * This function adds links to the appropriate resource to the administrator bar on the rendered page.
+ */
 void
 gss_server_add_module (GssServer * server, GssModule * module)
 {
@@ -1040,6 +1084,14 @@ gss_server_lookup_resource (GssServer * server, const char *path)
   return g_hash_table_lookup (server->resources, path);
 }
 
+/**
+ * gss_server_resource_callback:
+ *
+ * This is the entry point from libsoup to the gstreamer streaming server.
+ *
+ * The expected usage is that this function is given to soup_server_add_handler
+ * to handle all url patterns that match "/" (so, basically everything).
+ */
 static void
 gss_server_resource_callback (SoupServer * soupserver, SoupMessage * msg,
     const char *path, GHashTable * query, SoupClientContext * client,
