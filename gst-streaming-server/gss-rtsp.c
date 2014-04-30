@@ -68,6 +68,7 @@ gss_rtsp_stream_free (GssRtspStream * rtsp_stream)
 void
 gss_rtsp_stream_start (GssRtspStream * rtsp_stream)
 {
+  GstRTSPMountPoints *mounts;
   GString *pipe_desc;
   int pipe_fds[2];
   int ret;
@@ -92,11 +93,9 @@ gss_rtsp_stream_start (GssRtspStream * rtsp_stream)
   gst_rtsp_media_factory_set_launch (rtsp_stream->factory, pipe_desc->str);
   g_string_free (pipe_desc, FALSE);
 
-  rtsp_stream->mapping =
-      gst_rtsp_server_get_media_mapping (rtsp_stream->server);
-  gst_rtsp_media_mapping_add_factory (rtsp_stream->mapping, "/stream",
-      rtsp_stream->factory);
-  g_object_unref (rtsp_stream->mapping);
+  mounts = gst_rtsp_server_get_mount_points (rtsp_stream->server);
+  gst_rtsp_mount_points_add_factory (mounts, "/stream", rtsp_stream->factory);
+  g_object_unref (mounts);
 
   g_signal_emit_by_name (rtsp_stream->stream->sink, "add", pipe_fds[1]);
 

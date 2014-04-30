@@ -34,7 +34,6 @@ struct _GssRtspStream {
   GssStream *stream;
   GstRTSPServer *server;
 
-  GstRTSPMediaMapping *mapping;
   GstRTSPMediaFactory *factory;
 };
 
