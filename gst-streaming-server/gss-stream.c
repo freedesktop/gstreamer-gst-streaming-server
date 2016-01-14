@@ -43,6 +43,15 @@ enum
 #define DEFAULT_HEIGHT 360
 #define DEFAULT_BITRATE 600000
 
+#define GSS_STREAM_MAX_FDS 65536
+typedef struct _FDInfo FDInfo;
+struct _FDInfo
+{
+  void (*callback) (GssStream * stream, int fd, void *priv);
+  void *priv;
+};
+static FDInfo gss_stream_fd_table[GSS_STREAM_MAX_FDS];
+
 
 
 static void msg_wrote_headers (SoupMessage * msg, void *user_data);

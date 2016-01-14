@@ -117,18 +117,6 @@ struct _GssConnection {
   GssProgram *program;
 };
 
-
-/* internal */
-#define GSS_STREAM_MAX_FDS 65536
-typedef struct _FDInfo FDInfo;
-struct _FDInfo {
-  void (*callback) (GssStream *stream, int fd, void *priv);
-  void *priv;
-};
-FDInfo gss_stream_fd_table[GSS_STREAM_MAX_FDS];
-/* end internal */
-
-
 GType gss_stream_get_type (void);
 GType gss_stream_type_get_type (void);
 
