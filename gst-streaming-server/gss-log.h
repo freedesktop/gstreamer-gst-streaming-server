@@ -30,7 +30,7 @@ typedef enum {
   GSS_ERROR_FILE_READ
 } GssErrorEnum;
 
-GQuark _gss_error_quark;
+extern GQuark _gss_error_quark;
 
 void gss_log_init (void);
 void gss_log_set_verbosity (int level);

@@ -21,6 +21,8 @@
 
 static int gss_log_verbosity = 0;
 
+GQuark _gss_error_quark = 0;
+
 static void log_handler (GstDebugCategory * category, GstDebugLevel level,
     const gchar * file, const gchar * function, gint line, GObject * object,
     GstDebugMessage * message, gpointer data);
