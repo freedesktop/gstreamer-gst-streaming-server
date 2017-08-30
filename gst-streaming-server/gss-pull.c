@@ -243,6 +243,7 @@ gss_stream_create_follow_pipeline (GssStream * stream, const char *follow_url)
   if (error != NULL) {
     GST_WARNING ("pipeline parse error: %s", error->message);
     g_error_free (error);
+    g_string_free (pipe_desc, TRUE);
     return;
   }
   g_string_free (pipe_desc, TRUE);
